@@ -1,0 +1,44 @@
+<div id="grid" class="row">
+
+	<div class="one-third column elem"></div>
+
+	<div class="one-third column elem"></div>
+
+	<div class="one-third column elem"></div>
+
+</div>
+
+<!-- item inserted into each column -->
+<koken:loop>
+
+	<div class="item">
+
+		<koken:link title="View {{ album.title }}">
+
+			<koken:if data="settings.albums_thumb_crop" equals="none">
+
+				<koken:img lazy="true" />
+
+			<koken:else>
+
+				<koken:img size="{{ settings.albums_thumb_size }}" lazy="true" />
+
+			</koken:if>
+
+		</koken:link>
+
+		<div class="info">
+
+			<h4>
+				<koken:link title="View {{ album.title }}">{{ album.title }}</koken:link>
+			</h4>
+
+			{{ album.summary|album.description }}
+
+		</div>
+
+	</div>
+
+</koken:loop>
+
+<koken:asset file="js/thumbgrid.js" />

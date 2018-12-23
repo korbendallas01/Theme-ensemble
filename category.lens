@@ -1,0 +1,112 @@
+<koken:include file="inc/header.html" />
+
+<koken:load>
+
+	<koken:head>
+		<meta property="og:site_name" content="{{ site.title }}" />
+		<meta property="og:title" content="{{ labels.category.plural }} / {{ category.title }}" />
+		<meta property="og:description" content="{{ site.description strip_html='true' }}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="{{ location.site_url }}{{ location.here }}" />
+	</koken:head>
+
+	<div id="mob-pag" class="content-row">
+
+		<div class="content-wrap">
+
+			<koken:previous>
+				<koken:link class="pag larr" title="View all content in the category {{ category.title }}" bind_to_key="left">{{ category.title }}</koken:link>
+			</koken:previous>
+
+			&nbsp;&nbsp;
+
+			<koken:next>
+				<koken:link class="pag rarr" title="View all content in the category {{ category.title }}" bind_to_key="right">#{{ category.title }}</koken:link>
+			</koken:next>
+
+		</div>
+
+	</div>
+
+	<div class="content-row">
+
+		<div class="content-wrap">
+
+			<ul class="detail-nav">
+
+				<li>
+					<span class="l">
+						<koken:previous>
+							<koken:link class="pag larr" title="View all content in the category {{ category.title }}">#{{ category.title }}</koken:link>
+						</koken:previous>
+					</span>
+					<span class="m">
+						<h2 class="archive">
+							{{ category.title }}
+						</h2>
+					</span>
+					<span class="r">
+						<koken:next>
+							<koken:link class="pag rarr" title="View all content in the category {{ category.title }}">{{ category.title }}</koken:link>
+						</koken:next>
+					</span>
+				</li>
+
+			</ul>
+
+		</div>
+
+	</div>
+
+	<div id="grid" class="row no-rebalance">
+
+		<div class="one-third column elem"></div>
+
+		<div class="one-third column elem"></div>
+
+		<div class="one-third column elem"></div>
+
+	</div>
+
+	<koken:loop>
+
+		<koken:event>
+
+			<div class="item">
+
+				<koken:include file="inc/event_album.html" />
+
+				<koken:include file="inc/event_album_update.html" />
+
+				<koken:include file="inc/event_content.html" />
+
+				<koken:include file="inc/event_essay.html" />
+
+			</div>
+
+		</koken:event>
+
+	</koken:loop>
+
+	<koken:include file="inc/pagination.html" />
+
+	<koken:include file="inc/infinite-msg.html" />
+
+	<koken:include file="inc/like-tweet.html" />
+
+	<koken:asset file="js/grid.js" />
+
+<koken:else>
+
+	<koken:note>
+
+		<strong>No albums found.</strong> Create some in the Library.
+
+	</koken:note>
+
+	<br>
+	<br>
+
+</koken:load>
+
+<koken:include file="inc/footer.html" />

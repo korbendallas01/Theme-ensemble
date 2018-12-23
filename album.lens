@@ -1,0 +1,244 @@
+<koken:include file="inc/header.html" />
+
+<koken:load>
+
+	<koken:head>
+		<meta property="og:site_name" content="{{ site.title }}" />
+		<meta property="og:title" content="{{ album.title strip_html="true" }}" />
+		<meta property="og:description" content="{{ album.summary | album.description strip_html="true" }}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="{{ album.url }}" />
+		<koken:covers><koken:shift>
+		<meta property="og:image" content="{{ content.presets.medium_large.url }}" />
+		<meta property="og:image:width" content="{{ content.presets.medium_large.width }}" />
+		<meta property="og:image:height" content="{{ content.presets.medium_large.height }}" />
+		</koken:shift></koken:covers>
+		<koken:not empty="profile.twitter">
+			<meta name="twitter:card" content="gallery" />
+			<meta name="twitter:site" content="@{{ profile.twitter }}" />
+			<meta name="twitter:creator" content="@{{ profile.twitter }}" />
+			<koken:covers minimum="4" limit="4">
+				<koken:loop>
+					<meta name="twitter:image{{ index }}" content="{{ content.presets.medium_large.cropped.url }}">
+				</koken:loop>
+			</koken:covers>
+		</koken:not>
+	</koken:head>
+
+	<div id="mob-pag" class="content-row">
+
+		<div class="content-wrap">
+
+			<koken:previous>
+				<koken:link class="pag larr" title="{{ album.title }}" bind_to_key="left">{{ album.title }}</koken:link>
+			</koken:previous>
+
+			&nbsp;&nbsp;
+
+			<koken:next>
+				<koken:link class="pag rarr" title="{{ album.title }}" bind_to_key="right">{{ album.title }}</koken:link>
+			</koken:next>
+
+		</div>
+
+	</div>
+
+	<div class="content-row">
+
+		<div class="content-wrap">
+
+			<ul class="detail-nav">
+
+				<li>
+					<span class="l">
+						<koken:previous>
+							<koken:link class="pag larr" title="{{ album.title }}">{{ album.title }}</koken:link>
+						</koken:previous>
+					</span>
+					<span class="m">
+						<h2>{{ album.title }}
+						<koken:if true="settings.show_album_dl">
+								<br>
+								<koken:album_download>
+									<koken:link title="{{ language.download }}"><i class="kicon-dl"></i></koken:link>
+								</koken:album_download>
+						</koken:if>
+						</h2>
+						<koken:if true="settings.show_summary">{{ album.description | album.summary }}</koken:if>
+					</span>
+					<span class="r">
+						<koken:next>
+							<koken:link class="pag rarr" title="{{ album.title }}">{{ album.title }}</koken:link>
+						</koken:next>
+					</span>
+				</li>
+
+			</ul>
+
+		</div>
+
+	</div>
+
+	<div class="content-row">
+
+		<div class="wrap">
+
+			<koken:if true="settings.social_bttns_show_album">
+				<koken:include file="inc/social-bttns.html" />
+			</koken:if>
+
+			<koken:topics>
+
+				<ol id="album_topics" class="meta">
+					<li>
+					<strong>Read more:</strong>
+					<koken:loop separator=", ">
+						<koken:link title="Read {{ title }}">
+							{{ title }}
+						</koken:link>
+					</koken:loop>
+					</li>
+				</ol>
+
+			</koken:topics>
+
+			<koken:categories>
+
+				<ol id="album_categories" class="meta">
+					<li>
+					<strong>{{ labels.category.plural }}:</strong>
+					<koken:loop separator=", ">
+						<koken:link title="View all {{ labels.album.plural case='lower' }} in {{ category.title }}">
+							{{ category.title }}
+						</koken:link>
+					</koken:loop>
+					</li>
+				</ol>
+
+			</koken:categories>
+
+			<koken:tags>
+
+				<ol id="album_tags" class="meta mute">
+					<li>
+					<koken:loop separator="&nbsp;">
+						<koken:link title="View all {{ labels.album.plural case='lower' }} in {{ category.title }}">
+							#{{ tag.title }}
+						</koken:link>
+					</koken:loop>
+					</li>
+				</ol>
+
+			</koken:tags>
+
+		</div>
+
+	</div>
+
+	<koken:if true="settings.social_bttns_show_one">
+
+		<koken:if true="album.public">
+
+			<koken:include file="inc/share-links.html" />
+
+		</koken:if>
+
+	</koken:if>
+
+	<koken:include file="inc/like-tweet.html" />
+
+	<koken:filtered>
+		<div class="content-row">
+			<p>
+				<koken:loop>
+					<koken:if data="{{ filter.title }}" equals="Date">
+						Displaying {{ filter.count }} {{ filter.count plural="items" singular="item" }} added on {{ filter.value }} / <koken:link>View all</koken:link>
+					</koken:if>
+				</koken:loop>
+			</p>
+		</div>
+	</koken:filtered>
+
+	<koken:loop>
+
+		<div class="list-image">
+
+			<koken:content_video>
+				<koken:video />
+			</koken:content_video>
+
+			<koken:content_image>
+				<koken:link title="View {{ content.title | content.filename }}">
+					<koken:img lazy="true" />
+				</koken:link>
+			</koken:content_image>
+
+			<koken:if true="settings.show_title">
+				<h3>
+					<koken:link title="View {{ content.title | content.filename }}">
+						{{ content.title | content.filename }}
+					</koken:link>
+				</h3>
+			</koken:if>
+
+			<koken:if true="settings.show_rating">
+				<koken:rating>
+					<p>{{ rating }}</p>
+				</koken:rating>
+			</koken:if>
+
+			<koken:if true="settings.show_caption">
+				{{ content.caption paragraphs="true" }}
+			</koken:if>
+
+		</div>
+
+	</koken:loop>
+
+	<koken:filtered>
+		<div class="content-row">
+			<p>
+				<span class="filter_count"><koken:link title="View all of {{ album.title }}">View all of {{ album.title }}</koken:link></span>
+			</p>
+		</div>
+	</koken:filtered>
+
+	<koken:include file="inc/pagination.html" />
+
+	<koken:if true="settings.show_more_albums">
+
+		<koken:load source="albums">
+
+			<div id="foot-more">
+
+				<div class="content-row">
+
+					<koken:link title="{{ labels.album.plural }}" to="albums"><h3>{{ labels.album.plural }}</h3></koken:link>
+
+				</div>
+
+				<koken:include file="inc/loop-album-grid.html" />
+
+			</div>
+
+		</koken:load>
+
+	</koken:if>
+
+	<koken:keyboard_scroll element="div.list-image" offset="50" />
+
+<koken:else>
+
+	<koken:note>
+
+		<p>
+			This album is empty. Add content to it in the Library.
+		</p>
+
+		<br><br>
+
+	</koken:note>
+
+</koken:load>
+
+<koken:include file="inc/footer.html" />

@@ -1,0 +1,53 @@
+<koken:pagination limit="20">
+
+<ul id="pag">
+
+	<li>
+
+		<span>
+
+			<koken:pagination_previous>
+
+				<koken:link class="larr" title="View page {{ previous_page.number }}">
+					Previous
+				</koken:link>
+				&nbsp;&nbsp;
+
+			</koken:pagination_previous>
+
+		</span>
+
+		<span>
+
+			<koken:pagination_limited_previous>
+				<koken:link class="num">...</koken:link>&nbsp;
+			</koken:pagination_limited_previous>
+
+			<koken:loop>
+				<koken:link class="num {{ is_current }}" title="View page {{ number }}">{{ number }}</koken:link>&nbsp;
+			</koken:loop>
+
+			<koken:pagination_limited_next>
+				<koken:link class="num">...</koken:link>
+			</koken:pagination_limited_next>
+
+		</span>
+
+		<span>
+
+			<koken:pagination_next>
+
+				&nbsp;&nbsp;
+				<koken:link class="rarr" title="View page {{ next_page.number }}">
+					Next
+				</koken:link>
+
+			</koken:pagination_next>
+
+		</span>
+
+	</li>
+
+</ul>
+
+</koken:pagination>

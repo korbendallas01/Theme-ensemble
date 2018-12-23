@@ -1,0 +1,71 @@
+<div class="essay-body">
+
+	{{ essay.content }}
+
+	<koken:more>
+		<p class="center">
+			<koken:link title="{{ essay.title }}" class="read_more pag rarr">
+				{{ essay.read_more_label }}
+			</koken:link>
+		</p>
+	</koken:more>
+
+</div>
+
+<footer>
+
+	<koken:if true="list">
+		<koken:discussion_count>
+			<ol class="meta">
+				<li>
+					<span class="k-discussion-count">{{ discussion_count }}</span>
+				</li>
+			</ol>
+		</koken:discussion_count>
+	</koken:if>
+
+	<koken:topics>
+
+		<ol class="meta">
+			<li>
+				See more in
+				<koken:loop separator=", ">
+					<koken:link title="View {{ album.title }}">
+						{{ album.title }}
+					</koken:link>
+				</koken:loop>
+			</li>
+		</ol>
+
+	</koken:topics>
+
+	<koken:categories>
+
+		<ol class="meta">
+			<li>
+				Read more in
+				<koken:loop separator=", ">
+					<koken:link title="View all {{ labels.essay.plural case='lower' }} in {{ category.title }}">
+						{{ category.title }}
+					</koken:link>
+				</koken:loop>
+			</li>
+		</ol>
+
+	</koken:categories>
+
+	<koken:tags>
+
+		<ol class="meta mute">
+			<li>
+				<koken:loop separator="&nbsp;">
+				<koken:link title="View all {{ labels.essay.plural case='lower' }} in #{ tag.title }}">
+						#{{ tag.title }}
+					</koken:link>
+				</koken:loop>
+			</li>
+		</ol>
+
+	</koken:tags>
+
+</footer>

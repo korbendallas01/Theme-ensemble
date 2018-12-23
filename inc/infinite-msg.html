@@ -1,0 +1,13 @@
+<div id="infinite_load_msg">
+	<span>Loading more...</span>
+</div>
+
+<script>
+	$(window).on('k-infinite-loading', function() {
+		$('#infinite_load_msg').show();
+	});
+
+	$(window).on('k-infinite-loaded', function() {
+		$('#infinite_load_msg').hide();
+	});
+</script>

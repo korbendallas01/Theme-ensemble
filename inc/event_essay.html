@@ -1,0 +1,98 @@
+<koken:event_essay>
+
+	<koken:featured_image>
+
+		<koken:link title="View {{ essay.title }}">
+
+			<koken:img lazy="true" />
+
+		</koken:link>
+
+	</koken:featured_image>
+
+	<koken:if true="settings.show_event_text">
+
+		<div class="info">
+
+			<koken:if true="settings.show_event_title">
+
+				<h4>
+					<koken:link title="View {{ essay.title }}">
+						{{ essay.title }}
+					</koken:link>
+				</h4>
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_caption">
+
+				{{ essay.excerpt }}
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_categories">
+
+				<koken:categories>
+
+					<ol class="meta">
+						<li>
+							See more in
+							<koken:loop separator=", ">
+								<koken:link to="category" title="View everything in {{ category.title }}">
+									{{ category.title }}
+								</koken:link>
+							</koken:loop>
+						</li>
+					</ol>
+
+				</koken:categories>
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_tags">
+
+				<koken:tags>
+
+					<ol class="meta mute">
+						<li>
+							<koken:loop separator="&nbsp;">
+								<koken:link to="tag" title="View everything in {{ tag.title }}">
+									#{{ tag.title }}
+								</koken:link>
+							</koken:loop>
+						</li>
+					</ol>
+
+				</koken:tags>
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_counts">
+
+				<koken:discussion_count>
+
+					<ol class="meta mute">
+						<li>
+							<span class="comment_count">{{ discussion_count }}</span>
+						</li>
+					</ol>
+
+				</koken:discussion_count>
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_date">
+
+				<p class="event_meta">
+					<koken:link to="date">
+						<koken:time relative="{{ settings.show_event_date_relative }}" />
+					</koken:link>
+				</p>
+
+			</koken:if>
+
+		</div>
+
+	</koken:if>
+
+</koken:event_essay>

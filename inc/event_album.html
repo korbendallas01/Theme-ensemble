@@ -1,0 +1,121 @@
+<koken:event_album>
+
+	<koken:if data="settings.album_time_type" equals="mosaic" live="false">
+		<koken:link title="View {{ album.title }}">
+			<koken:if condition="{{ album.counts.total }} === 1">
+				<koken:img lazy="true" />
+			<koken:else>
+				<koken:if true="settings.album_cover_limit">
+					<koken:covers minimum="{{ settings.mosaic_cols * settings.mosaic_rows }}" limit="{{ settings.mosaic_cols * settings.mosaic_rows }}">
+						<ul class="k-mosaic k-mosaic-{{ settings.mosaic_cols }} edge">
+							<koken:loop>
+								<koken:background tag="li"></koken:background>
+							</koken:loop>
+						</ul>
+					</koken:covers>
+				<koken:else>
+					<koken:covers limit="{{ covers.length }}">
+						<ul class="k-mosaic k-mosaic-{{ settings.mosaic_cols }} edge">
+							<koken:loop>
+								<koken:background tag="li"></koken:background>
+							</koken:loop>
+						</ul>
+					</koken:covers>
+				</koken:if>
+			</koken:if>
+		</koken:link>
+
+	</koken:if>
+
+	<koken:if data="settings.album_time_type" equals="slideshow" live="false">
+
+		<div>
+
+			<koken:pulse group="timeline-albums" data="album.covers" link_to="album" />
+
+		</div>
+
+	</koken:if>
+
+	<koken:if data="settings.album_time_type" equals="cover" live="false">
+
+		<koken:link title="View {{ album.title }}">
+
+			<koken:img lazy="true" />
+
+		</koken:link>
+
+	</koken:if>
+
+	<koken:if true="settings.show_event_text">
+
+		<div class="info">
+
+			<koken:if true="settings.show_event_title">
+
+				<h4>
+					<koken:link title="View {{ album.title }}">
+						{{ album.title }}
+					</koken:link>
+				</h4>
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_caption">
+
+				{{ album.summary | album.description }}
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_categories">
+
+				<koken:categories>
+
+					<ol class="meta">
+						<li>
+							See more in
+							<koken:loop separator=", ">
+								<koken:link to="category" title="View everything in {{ category.title }}">
+									{{ category.title }}
+								</koken:link>
+							</koken:loop>
+						</li>
+					</ol>
+
+				</koken:categories>
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_tags">
+
+				<koken:tags>
+
+					<ol class="meta mute">
+						<li>
+							<koken:loop separator="&nbsp;">
+								<koken:link to="tag" title="View everything in #{{ tag.title }}">
+									#{{ tag.title }}
+								</koken:link>
+							</koken:loop>
+						</li>
+					</ol>
+
+				</koken:tags>
+
+			</koken:if>
+
+			<koken:if true="settings.show_event_date">
+
+				<p class="event_meta">
+					<koken:link to="date">
+						<koken:time relative="{{ settings.show_event_date_relative }}" />
+					</koken:link>
+				</p>
+
+			</koken:if>
+
+		</div>
+
+	</koken:if>
+
+</koken:event_album>
